@@ -302,6 +302,9 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 
+import { useScroll } from './composables/useScroll'
+import { useLoading } from './composables/useLoading'
+
 import NameDark from './assets/Santiago_Melgarejo.png'
 import NameLight from './assets/Santiago_Melgarejo_Black.png'
 
@@ -315,15 +318,12 @@ import BlenderLogo from './assets/logos/Blender.svg'
 import ESLogo from './assets/logos/es.svg'
 import ENLogo from './assets/logos/en.svg'
 
-import { useScroll } from './composables/useScroll'
 
+
+const { loading, slideOut, start, stop } = useLoading()
 const { scrollToSection } = useScroll()
-const loading = ref(0)
-const loaded = ref(false)
-const slideOut = ref(false)
-const showFloatingNav = ref(false)
 
-let loaderInterval
+const showFloatingNav = ref(false)
 
 const isDark = ref(true)
 const nameImage = computed(() => (isDark.value ? NameDark : NameLight))
@@ -354,18 +354,6 @@ const skillGroups = ref([
     ],
   },
 ])
-
-function simulateLoading() {
-  loaderInterval = setInterval(() => {
-    if (loading.value >= 100) {
-      clearInterval(loaderInterval)
-      slideOut.value = true
-      setTimeout(() => { loaded.value = true }, 800)
-    } else {
-      loading.value += 5
-    }
-  }, 20)
-}
 
 
 // Aplica el tema y persiste (+ clase .dark para la animación)
@@ -526,16 +514,14 @@ onMounted(() => {
   const preload = new Image()
   preload.src = NameLight
 
-  simulateLoading()
+  start()
   setTimeout(() => { showFloatingNav.value = true }, 1800)
 
-  // Idioma persistido
   const savedLocale = localStorage.getItem('locale')
   setLocale(savedLocale && locales.includes(savedLocale) ? savedLocale : 'en')
 })
-
 onUnmounted(() => {
-  if (loaderInterval) clearInterval(loaderInterval)
+  stop()
 })
 
 function submitForm() {}
