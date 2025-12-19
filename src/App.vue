@@ -27,21 +27,12 @@
       </div>
 
       <!-- Scroll button a Skills -->
-      <div class="scroll-button">
-        <div
-          class="scroll-toggle"
-          @click="scrollToSection('#skills')"
-          role="button"
-          tabindex="0"
-          :aria-label="t('aria.scrollSkills')"
-          @keyup.enter="scrollToSection('#skills')"
-        >
-          <svg class="arrow-down" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-          </svg>
-          <span class="sr-only">{{ t('aria.goSkills') }}</span>
-        </div>
-      </div>
+      <ScrollButton
+      target="#skills"
+        :aria="t('aria.scrollSkills')"
+      >
+        {{ t('aria.goSkills') }}
+      </ScrollButton>
     </main>
 
     <!-- Skills Section (LOGOS) -->
@@ -62,21 +53,12 @@
         </div>
 
         <!-- Scroll button a About -->
-        <div class="scroll-button">
-          <div
-            class="scroll-toggle"
-            @click="scrollToSection('#about')"
-            role="button"
-            tabindex="0"
-            :aria-label="t('aria.scrollAbout')"
-            @keyup.enter="scrollToSection('#about')"
-          >
-            <svg class="arrow-down" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-            <span class="sr-only">{{ t('aria.goAbout') }}</span>
-          </div>
-        </div>
+        <ScrollButton
+      target="#about"
+        :aria="t('aria.scrollAbout')"
+      >
+        {{ t('aria.goAbout') }}
+      </ScrollButton>
       </div>
     </section>
 
@@ -109,21 +91,12 @@
         </div>
 
         <!-- Scroll button a Projects -->
-        <div class="scroll-button">
-          <div
-            class="scroll-toggle"
-            @click="scrollToSection('#projects')"
-            role="button"
-            tabindex="0"
-            :aria-label="t('aria.scrollProjects')"
-            @keyup.enter="scrollToSection('#projects')"
-          >
-            <svg class="arrow-down" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-            <span class="sr-only">{{ t('aria.goProjects') }}</span>
-          </div>
-        </div>
+        <ScrollButton
+      target="#projects"
+        :aria="t('aria.scrollProjects')"
+      >
+        {{ t('aria.goProjects') }}
+      </ScrollButton>
       </div>
     </section>
 
@@ -206,95 +179,37 @@
         </div>
 
         <!-- Scroll button volver al Home -->
-        <div class="scroll-button">
-          <div
-            class="scroll-toggle"
-            @click="scrollToSection('#home')"
-            role="button"
-            tabindex="0"
-            :aria-label="t('aria.backToTop')"
-            @keyup.enter="scrollToSection('#home')"
-          >
-            <svg class="arrow-down" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-            <span class="sr-only">{{ t('aria.backToTop') }}</span>
-          </div>
-        </div>
+        <ScrollButton
+      target="#home"
+        :aria="t('aria.scrollHome')">
+        {{ t('aria.goHome') }}
+      </ScrollButton>
       </div>
     </section>
 
     <!-- Floating Navigation -->
-    <div class="footer-icons" :class="{ 'float-in': showFloatingNav }">
-      <v-btn icon class="icon-btn" @click="scrollToSection('#home')" :aria-label="t('aria.navHome')">
-        <v-icon>mdi-home</v-icon>
-      </v-btn>
-      <v-btn icon class="icon-btn" @click="scrollToSection('#skills')" :aria-label="t('aria.navSkills')">
-        <v-icon>mdi-code-tags</v-icon>
-      </v-btn>
-      <v-btn icon class="icon-btn" @click="scrollToSection('#about')" :aria-label="t('aria.navAbout')">
-        <v-icon>mdi-account</v-icon>
-      </v-btn>
-
-      <div class="divider"></div>
-
-      <v-btn
-        icon
-        class="icon-btn"
-        href="https://github.com/Melli808"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Open GitHub"
-      >
-        <v-icon>mdi-github</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        class="icon-btn"
-        href="https://www.linkedin.com/in/santiago-melgarejo-a15985328/"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Open LinkedIn"
-      >
-        <v-icon>mdi-linkedin</v-icon>
-      </v-btn>
-    </div>
+     <FloatingNav :show="showFloatingNav" :t="t" />
   </v-app>
 
   <!-- Botones globales teletransportados al <body> -->
   <teleport to="body">
-    <div class="theme-toggle-global">
+    <div v-if="loaded" class="theme-toggle-global">
       <!-- Selector de idioma (a la izquierda) -->
-      <v-menu v-model="langMenu" :close-on-content-click="true" location="bottom">
-        <template #activator="{ props }">
-          <v-btn
-            v-bind="props"
-            class="lang-btn"
-            :aria-label="`${t('aria.changeLanguage')} ${locale.toUpperCase()}`">
-            {{ locale.toUpperCase() }}
-          </v-btn>
-        </template>
-
-        <v-list class="lang-menu">
-          <v-list-item
-            v-for="l in locales"
-            :key="l"
-            @click="setLocale(l)"
-            :aria-selected="locale === l">
-            <v-list-item-title>{{ l.toUpperCase() }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
+         <LanguageSelector
+           :t="t"
+           :locale="locale"
+           :locales="locales"
+           v-model:langMenu="langMenu"
+           @set-locale="setLocale"
+/>
 
       <!-- Botón de tema -->
-      <v-btn
-        icon
-        class="icon-btn theme-toggle-btn"
-        @click="toggleDarkMode"
-        :aria-pressed="isDark"
-        :aria-label="t('aria.toggleTheme')">
-        <v-icon>{{ isDark ? 'mdi-weather-night' : 'mdi-white-balance-sunny' }}</v-icon>
-      </v-btn>
+      <ThemeToggle
+      :t="t"
+      :isDark="isDark"
+      @toggle="toggleDarkMode"
+/>
+
     </div>
   </teleport>
 </template>
@@ -304,6 +219,12 @@ import { ref, onMounted, onUnmounted, computed } from 'vue'
 
 import { useScroll } from './composables/useScroll'
 import { useLoading } from './composables/useLoading'
+import ScrollButton from './components/navigation/ScrollButton.vue'
+import FloatingNav from './components/navigation/FloatingNav.vue'
+import LanguageSelector from './components/ui/LanguageSelector.vue'
+import ThemeToggle from './components/ui/ThemeToggle.vue'
+import { useI18nLite } from './composables/useI18nLite'
+
 
 import NameDark from './assets/Santiago_Melgarejo.png'
 import NameLight from './assets/Santiago_Melgarejo_Black.png'
@@ -320,7 +241,7 @@ import ENLogo from './assets/logos/en.svg'
 
 
 
-const { loading, slideOut, start, stop } = useLoading()
+const { loading, slideOut, loaded, start, stop } = useLoading()
 const { scrollToSection } = useScroll()
 
 const showFloatingNav = ref(false)
@@ -381,10 +302,6 @@ function toggleDarkMode() {
 }
 
 /* ===== i18n LITE ===== */
-const locales = ['es', 'en']
-const langMenu = ref(false)
-const locale = ref('en')
-
 const messages = {
   en: {
     loading: { text: 'LOADING...' },
@@ -494,17 +411,14 @@ const messages = {
   },
 }
 
-function t(path) {
-  const get = (obj, p) => p.split('.').reduce((o, k) => (o && o[k] !== undefined ? o[k] : undefined), obj)
-  return get(messages[locale.value], path) ?? get(messages.en, path) ?? path
-}
+const locales = ['es', 'en']
+const langMenu = ref(false)
+const { locale, setLocale, t } = useI18nLite(messages, 'en')
 
-function setLocale(l) {
-  if (!locales.includes(l)) return
-  locale.value = l
-  document.documentElement.setAttribute('lang', l)
-  localStorage.setItem('locale', l)
-}
+
+
+
+
 
 onMounted(() => {
   const saved = localStorage.getItem('theme')
@@ -518,7 +432,10 @@ onMounted(() => {
   setTimeout(() => { showFloatingNav.value = true }, 1800)
 
   const savedLocale = localStorage.getItem('locale')
-  setLocale(savedLocale && locales.includes(savedLocale) ? savedLocale : 'en')
+  if (savedLocale && locales.includes(savedLocale)) {
+  setLocale(savedLocale)
+}
+
 })
 onUnmounted(() => {
   stop()
@@ -618,16 +535,6 @@ function submitForm() {}
 .intro-desc{ font-size:1rem; color:var(--text-2); line-height:1.6; margin-bottom:20px; position:relative; transform:translate(-200px,-120px); transition:color .35s ease; }
 .intro-available{ color:var(--accent); font-family:monospace; font-size:.9rem; position:relative; transform:translate(-200px,-120px); }
 
-.scroll-button{ margin-top:40px; height:48px; display:flex; align-items:center; justify-content:center; }
-.scroll-toggle{
-  display:flex; align-items:center; justify-content:center; gap:8px; width:48px; height:48px; border-radius:24px; background:transparent;
-  border:1px solid var(--border); transition:all .3s ease; overflow:hidden; cursor:pointer; color:var(--text-1); position:relative;
-}
-.scroll-toggle svg{ opacity:1; stroke:var(--text-1); transition:transform .3s ease, stroke .3s ease; }
-.scroll-toggle:hover svg{ stroke:var(--bg); }
-.scroll-toggle:hover{ width:50px; background:var(--text-1); color:var(--bg); box-shadow:0 2px 12px var(--shadow-1); }
-.arrow-down{ width:20px; height:20px; stroke:var(--text-1); opacity:1; }
-@keyframes fadeInUp{ from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
 
 /* === Skills === */
 .skills-section{ background:linear-gradient(to bottom, transparent 1%, var(--black) 100%); position:relative; z-index:2; }
@@ -705,26 +612,24 @@ function submitForm() {}
   font-size:.7rem;
 }
 
-/* Footer nav */
-.footer-icons{
-  position:fixed; bottom:20px; left:50%; transform:translate(-50%,12px);
-  background-color:var(--surface-2); padding:8px 10px; border-radius:999px; display:flex; align-items:center; gap:6px;
-  box-shadow:0 4px 20px var(--shadow-1); opacity:0; transition:opacity .6s ease, transform .6s ease, background-color .35s ease, color .35s ease, border-color .35s ease; z-index:999;
-}
-.footer-icons.float-in{ opacity:1; transform:translate(-50%,0); }
+/* icono modo oscuro/blanco */
+
 .icon-btn{ color:var(--text-1); width:40px; height:40px; min-width:0; border-radius:50%; background:transparent; transition:background-color .3s ease, transform .35s ease; }
 .icon-btn:hover{ background-color:var(--surface-3); transform:translateY(-1px) scale(1.03); }
-.divider{ width:1px; height:20px; background-color:var(--border); margin:0 4px; }
+
 
 /* Botón global (siempre visible, sin bloquear interacción debajo) */
-.theme-toggle-global{
+.theme-toggle-global  {
   position:fixed;
   top:calc(env(safe-area-inset-top, 0px) + 16px);
   right:calc(env(safe-area-inset-right, 0px) + 20px);
   z-index:2147483647;
-  pointer-events:none;
+  pointer-events:auto;
 }
-.theme-toggle-global .theme-toggle-btn{ pointer-events:auto; }
+.theme-toggle-global :deep(*) {
+  pointer-events:auto;
+}
+ .theme-toggle-btn{ pointer-events:auto; }
 
 /* Secciones genéricas */
 .section{ padding:100px 20px; position:relative; min-height:100vh; display:flex; align-items:center; z-index:2; scroll-margin-top:80px; }
@@ -790,7 +695,7 @@ function submitForm() {}
 }
 
 /* A11y */
-.sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
 
 /* ========================= */
 /*  APPEND: Language selector overrides (sin romper tu orden) */
@@ -802,32 +707,8 @@ function submitForm() {}
   gap:8px; /* separa el lang del theme */
 }
 
-.theme-toggle-global .lang-btn{
+.theme-toggle-global {
   pointer-events:auto;
 }
 
-.lang-btn{
-  height:40px;
-  min-width:48px;
-  padding:0 12px;
-  border-radius:999px;
-  background:var(--surface-2);
-  color:var(--text-1);
-  border:1px solid var(--border);
-  text-transform:none;
-  letter-spacing:.5px;
-  font-weight:600;
-  transition:background-color .3s ease, transform .35s ease, color .35s ease, border-color .35s ease;
-}
-
-.lang-btn:hover{
-  background-color:var(--surface-3);
-  transform:translateY(-1px) scale(1.03);
-}
-
-.lang-menu{
-  background:var(--surface-2);
-  border:1px solid var(--border);
-  box-shadow:0 8px 24px var(--shadow-1);
-}
 </style>
