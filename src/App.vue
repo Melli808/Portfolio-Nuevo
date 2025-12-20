@@ -10,30 +10,7 @@
     </div>
 
     <!-- CASA -->
-    <main id="home" class="start-screen" role="main">
-      <div class="intro">
-        <p class="intro-sub">{{ t('intro.sub') }}</p>
-
-        <div class="intro-name">
-          <img :src="nameImage" alt="Santiago" class="name-image" draggable="false" />
-        </div>
-
-        <h1 class="intro-role">{{ t('intro.role') }}</h1>
-
-        <p class="intro-desc">
-          {{ t('intro.desc') }}
-        </p>
-        <p class="intro-available">{{ t('intro.available') }}</p>
-      </div>
-
-      <!-- Scroll button a Skills -->
-      <ScrollButton
-      target="#skills"
-        :aria="t('aria.scrollSkills')"
-      >
-        {{ t('aria.goSkills') }}
-      </ScrollButton>
-    </main>
+    <HomeSection :t="t" :nameImage="nameImage" />
 
     <!-- Skills Section (LOGOS) -->
     <section id="skills" class="section skills-section">
@@ -217,6 +194,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 
+import HomeSection from './components/sections/HomeSection.vue'
 import { useScroll } from './composables/useScroll'
 import { useLoading } from './composables/useLoading'
 import ScrollButton from './components/navigation/ScrollButton.vue'
