@@ -13,32 +13,7 @@
     <HomeSection :t="t" :nameImage="nameImage" />
 
     <!-- Skills Section (LOGOS) -->
-    <section id="skills" class="section skills-section">
-      <div class="section-content">
-        <h2 class="section-title">{{ t('skills.title') }}</h2>
-
-        <div class="skills-grid logos">
-          <div class="skill-category" v-for="group in skillGroups" :key="group.title">
-            <h3>{{ group.title }}</h3>
-            <ul class="logo-grid">
-              <li v-for="item in group.items" :key="group.title + '-' + item.name" class="logo-item" :title="item.name">
-                <img :src="item.img" decoding="async" loading="lazy" :alt="`${item.name} logo`" />
-                <span class="logo-label">{{ item.name }}</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Scroll button a About -->
-        <ScrollButton
-      target="#about"
-        :aria="t('aria.scrollAbout')"
-      >
-        {{ t('aria.goAbout') }}
-      </ScrollButton>
-      </div>
-    </section>
-
+    <SkillsSection :t="t" :skillGroups="skillGroups" />
     <!-- About Section -->
     <section id="about" class="section about-section">
       <div class="section-content">
@@ -195,6 +170,7 @@
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 
 import HomeSection from './components/sections/HomeSection.vue'
+import SkillsSection from './components/sections/SkillsSection.vue' 
 import { useScroll } from './composables/useScroll'
 import { useLoading } from './composables/useLoading'
 import ScrollButton from './components/navigation/ScrollButton.vue'
@@ -503,43 +479,6 @@ function submitForm() {}
 .loading-text{ color:var(--muted); font-size:.9rem; margin-bottom:10px; letter-spacing:2px; }
 .loading-percent{ font-size:clamp(2.4rem,2vw + 1.6rem,4rem); font-weight:bold; color:var(--text-1); transition:all .3s ease; }
 
-/* Home */
-.start-screen{ width:100vw; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; z-index:1; text-align:center; }
-.intro{ text-align:left; max-width:720px; padding:20px; animation:fadeInUp 1s ease-out; z-index:2; }
-.intro-sub{ color:var(--muted); font-size:.9rem; margin-bottom:10px; letter-spacing:1.5px; position:relative; transform:translate(-300px,40px); }
-.intro-name{ font-size:clamp(2rem,6vw,4rem); font-weight:800; color:var(--text-1); margin:0; display:flex; align-items:center; }
-.name-image{ max-height:300px; object-fit:contain; pointer-events:none; user-select:none; position:relative; transform:translate(-300px,-50px); transition:filter .35s ease; }
-.intro-role{ font-size:clamp(1.5rem,3.5vw,2.5rem); font-weight:700; color:var(--text-3); margin:10px 0 20px; position:relative; transform:translate(-200px,-120px); transition:color .35s ease; }
-.intro-desc{ font-size:1rem; color:var(--text-2); line-height:1.6; margin-bottom:20px; position:relative; transform:translate(-200px,-120px); transition:color .35s ease; }
-.intro-available{ color:var(--accent); font-family:monospace; font-size:.9rem; position:relative; transform:translate(-200px,-120px); }
-
-
-/* === Skills === */
-.skills-section{ background:linear-gradient(to bottom, transparent 1%, var(--black) 100%); position:relative; z-index:2; }
-.skills-grid.logos{ display:grid; grid-template-columns:repeat(3,1fr); gap:30px; }
-.skill-category{
-  background:var(--surface-2); padding:30px; border-radius:10px; backdrop-filter:blur(5px);
-  border:1px solid var(--border); transition:background-color .35s ease, border-color .35s ease, color .35s ease;
-}
-.skill-category h3{ color:var(--text-1); margin-bottom:20px; font-size:1.3rem; }
-.logo-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(92px, 1fr)); gap:14px; list-style:none; padding:0; margin:0; }
-.logo-item{
-  aspect-ratio:1/1; border-radius:14px; border:1px solid var(--border-soft); background:var(--surface-3);
-  backdrop-filter:blur(5px); display:flex; flex-direction:column; align-items:center; justify-content:center;
-  gap:10px; transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease, background .2s ease; padding:12px;
-}
-.logo-item img{
-  width:42px; height:42px; object-fit:contain; filter:grayscale(20%) contrast(1.05) brightness(.95);
-  transition:filter .2s ease; pointer-events:none; user-select:none;
-}
-.logo-item:hover{
-  transform:translateY(-4px);
-  border-color:color-mix(in srgb, var(--accent) 70%, transparent);
-  box-shadow:0 10px 26px var(--shadow-2);
-  background:color-mix(in srgb, var(--accent) 6%, transparent);
-}
-.logo-item:hover img{ filter:grayscale(0%) contrast(1.1) brightness(1); }
-.logo-label{ font-size:.8rem; color:var(--text-2); text-align:center; line-height:1; }
 
 /* About Section */
 .about-section{ background:linear-gradient(to top,var(--black) 100%); }
@@ -610,7 +549,16 @@ function submitForm() {}
  .theme-toggle-btn{ pointer-events:auto; }
 
 /* Secciones genéricas */
-.section{ padding:100px 20px; position:relative; min-height:100vh; display:flex; align-items:center; z-index:2; scroll-margin-top:80px; }
+.section{ 
+  padding:100px 20px; 
+  position:relative; 
+  min-height:100vh; 
+  display:flex; 
+  align-items:center;
+  justify-content: center;
+  z-index:2; 
+  scroll-margin-top:80px; }
+
 .section-content{ max-width:1200px; margin:0 auto; width:100%; }
 .section-title{ font-size:clamp(1.6rem, 2vw + 1rem, 2.5rem); color:var(--text-1); margin-bottom:60px; position:relative; display:inline-block; }
 .section-title::after{ content:''; position:absolute; bottom:-10px; left:0; width:60px; height:3px; background:var(--accent); }
@@ -632,7 +580,6 @@ function submitForm() {}
 
 /* Responsive */
 @media (max-width:1200px){
-  .skills-grid.logos{ grid-template-columns:repeat(2,1fr); }
   .about-grid{ gap:30px; }
 }
 @media (max-width:992px){
@@ -648,8 +595,6 @@ function submitForm() {}
   .intro-sub{ transform:none; }
   .name-image{ transform:none; max-height:200px; }
   .intro-role,.intro-desc,.intro-available{ transform:none; }
-  .skills-grid.logos{ grid-template-columns:1fr; }
-  .logo-grid{ grid-template-columns:repeat(auto-fit,minmax(84px,1fr)); gap:12px; }
   .projects-grid{ grid-template-columns:1fr; }
   .section{ padding:80px 20px; }
   .footer-icons{ bottom:10px; padding:6px 8px; }
