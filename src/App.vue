@@ -15,43 +15,7 @@
     <!-- Skills Section (LOGOS) -->
     <SkillsSection :t="t" :skillGroups="skillGroups" />
     <!-- About Section -->
-    <section id="about" class="section about-section">
-      <div class="section-content">
-        <h2 class="section-title">{{ t('about.title') }}</h2>
-        <div class="about-grid">
-          <div class="about-text">
-            <p>{{ t('about.p1') }}</p>
-            <p>{{ t('about.p2') }}</p>
-            <p>{{ t('about.p3') }}</p>
-            <div class="about-tech">
-              <h3>{{ t('about.techTitle') }}</h3>
-              <ul class="tech-list">
-                <li>Vue.js</li>
-                <li>React</li>
-                <li>CSS3</li>
-                <li>JavaScript (ES6+)</li>
-                <li>Figma / Adobe XD</li>
-              </ul>
-            </div>
-          </div>
-          <div class="about-image">
-            <div class="image-container">
-              <div class="image-border"></div>
-              <img src="./assets/Me.jpg" alt="Profile portrait" class="profile-image" decoding="async" loading="lazy" />
-            </div>
-          </div>
-        </div>
-
-        <!-- Scroll button a Projects -->
-        <ScrollButton
-      target="#projects"
-        :aria="t('aria.scrollProjects')"
-      >
-        {{ t('aria.goProjects') }}
-      </ScrollButton>
-      </div>
-    </section>
-
+    <AboutSection :t="t" />
     <!-- Projects Section -->
     <section id="projects" class="section projects-section">
       <div class="section-content">
@@ -171,6 +135,7 @@ import { ref, onMounted, onUnmounted, computed } from 'vue'
 
 import HomeSection from './components/sections/HomeSection.vue'
 import SkillsSection from './components/sections/SkillsSection.vue' 
+import AboutSection from './components/sections/AboutSection.vue'   
 import { useScroll } from './composables/useScroll'
 import { useLoading } from './composables/useLoading'
 import ScrollButton from './components/navigation/ScrollButton.vue'
