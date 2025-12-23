@@ -447,19 +447,6 @@ function submitForm() {}
 
 /* About Section */
 .about-section{ background:linear-gradient(to top,var(--black) 100%); }
-.about-grid{ display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center; }
-.about-text{ color:var(--text-2); line-height:1.8; }
-.about-text p{ margin-bottom:20px; }
-.about-tech h3{ color:var(--text-1); margin:30px 0 15px; font-size:1.2rem; }
-.tech-list{ display:grid; grid-template-columns:repeat(2,1fr); gap:10px; list-style-type:none; padding:0; }
-.tech-list li{ position:relative; padding-left:20px; color:var(--text-2); }
-.tech-list li::before{ content:'▹'; position:absolute; left:0; color:var(--accent); }
-.about-image{ position:relative; }
-.image-container{ position:relative; max-width:400px; margin:0 auto; }
-.image-border{ position:absolute; width:100%; height:100%; border:2px solid var(--accent); top:20px; left:20px; z-index:-1; transition:all .3s ease; }
-.profile-image{ width:100%; height:auto; display:block; filter:grayscale(20%) contrast(1.1); transition:all .3s ease; }
-.image-container:hover .image-border{ top:15px; left:15px; }
-.image-container:hover .profile-image{ filter:grayscale(0%) contrast(1); }
 
 /* Projects Section */
 .projects-section{ background:linear-gradient(to top,var(--black) 100%); }
