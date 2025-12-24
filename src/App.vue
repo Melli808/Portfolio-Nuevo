@@ -8,105 +8,17 @@
         <div class="loading-percent">{{ loading }}%</div>
       </div>
     </div>
-
     <!-- CASA -->
     <HomeSection :t="t" :nameImage="nameImage" />
-
     <!-- Skills Section (LOGOS) -->
     <SkillsSection :t="t" :skillGroups="skillGroups" />
     <!-- About Section -->
     <AboutSection :t="t" />
     <!-- Projects Section -->
-    <section id="projects" class="section projects-section">
-      <div class="section-content">
-        <h2 class="section-title">{{ t('projects.title') }}</h2>
-        <div class="projects-grid">
-          <div class="project-card">
-            <div class="project-image">
-              <img
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                alt="Project 1"
-                decoding="async"
-                loading="lazy"
-              />
-              <div class="project-links">
-                <a href="#" class="project-link" rel="noopener noreferrer">{{ t('projects.live') }}</a>
-                <a href="#" class="project-link" rel="noopener noreferrer">{{ t('projects.code') }}</a>
-              </div>
-            </div>
-            <div class="project-info">
-              <h3>{{ t('projects.p1.title') }}</h3>
-              <p>{{ t('projects.p1.desc') }}</p>
-              <div class="project-tech">
-                <span>Vue.js</span>
-                <span>Firebase</span>
-                <span>SCSS</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-image">
-              <img
-                src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                alt="Project 2"
-                decoding="async"
-                loading="lazy"
-              />
-              <div class="project-links">
-                <a href="#" class="project-link" rel="noopener noreferrer">{{ t('projects.live') }}</a>
-                <a href="#" class="project-link" rel="noopener noreferrer">{{ t('projects.code') }}</a>
-              </div>
-            </div>
-            <div class="project-info">
-              <h3>{{ t('projects.p2.title') }}</h3>
-              <p>{{ t('projects.p2.desc') }}</p>
-              <div class="project-tech">
-                <span>React</span>
-                <span>D3.js</span>
-                <span>Node.js</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-image">
-              <img
-                src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                alt="Project 3"
-                decoding="async"
-                loading="lazy"
-              />
-              <div class="project-links">
-                <a href="#" class="project-link" rel="noopener noreferrer">{{ t('projects.live') }}</a>
-                <a href="#" class="project-link" rel="noopener noreferrer">{{ t('projects.code') }}</a>
-              </div>
-            </div>
-            <div class="project-info">
-              <h3>{{ t('projects.p3.title') }}</h3>
-              <p>{{ t('projects.p3.desc') }}</p>
-              <div class="project-tech">
-                <span>Three.js</span>
-                <span>GSAP</span>
-                <span>Vue.js</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Scroll button volver al Home -->
-        <ScrollButton
-      target="#home"
-        :aria="t('aria.scrollHome')">
-        {{ t('aria.goHome') }}
-      </ScrollButton>
-      </div>
-    </section>
-
+    <ProjectsSection :t="t" />
     <!-- Floating Navigation -->
      <FloatingNav :show="showFloatingNav" :t="t" />
   </v-app>
-
   <!-- Botones globales teletransportados al <body> -->
   <teleport to="body">
     <div v-if="loaded" class="theme-toggle-global">
@@ -116,38 +28,29 @@
            :locale="locale"
            :locales="locales"
            v-model:langMenu="langMenu"
-           @set-locale="setLocale"
-/>
-
+           @set-locale="setLocale"/>
       <!-- Botón de tema -->
       <ThemeToggle
       :t="t"
       :isDark="isDark"
-      @toggle="toggleDarkMode"
-/>
-
+      @toggle="toggleDarkMode"/>
     </div>
   </teleport>
 </template>
 
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
-
 import HomeSection from './components/sections/HomeSection.vue'
 import SkillsSection from './components/sections/SkillsSection.vue' 
 import AboutSection from './components/sections/AboutSection.vue'   
-import { useScroll } from './composables/useScroll'
+import ProjectsSection from './components/sections/ProjectsSection.vue'
 import { useLoading } from './composables/useLoading'
-import ScrollButton from './components/navigation/ScrollButton.vue'
 import FloatingNav from './components/navigation/FloatingNav.vue'
 import LanguageSelector from './components/ui/LanguageSelector.vue'
 import ThemeToggle from './components/ui/ThemeToggle.vue'
 import { useI18nLite } from './composables/useI18nLite'
-
-
 import NameDark from './assets/Santiago_Melgarejo.png'
 import NameLight from './assets/Santiago_Melgarejo_Black.png'
-
 import VueLogo from './assets/logos/vue.svg'
 import ReactLogo from './assets/logos/react.svg'
 import JsLogo from './assets/logos/javascript.svg'
@@ -157,17 +60,10 @@ import GitLogo from './assets/logos/git.svg'
 import BlenderLogo from './assets/logos/Blender.svg'
 import ESLogo from './assets/logos/es.svg'
 import ENLogo from './assets/logos/en.svg'
-
-
-
 const { loading, slideOut, loaded, start, stop } = useLoading()
-const { scrollToSection } = useScroll()
-
 const showFloatingNav = ref(false)
-
 const isDark = ref(true)
 const nameImage = computed(() => (isDark.value ? NameDark : NameLight))
-
 const skillGroups = ref([
   {
     title: 'Frontend Development',
@@ -447,40 +343,6 @@ function submitForm() {}
 
 /* About Section */
 .about-section{ background:linear-gradient(to top,var(--black) 100%); }
-
-/* Projects Section */
-.projects-section{ background:linear-gradient(to top,var(--black) 100%); }
-.projects-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:30px; }
-.project-card{ background:var(--surface-1); border-radius:10px; overflow:hidden; transition:transform .3s ease, box-shadow .3s ease, background-color .35s ease, border-color .35s ease; border:1px solid var(--border); }
-.project-card:hover{ transform:translateY(-10px); box-shadow:0 15px 30px var(--shadow-1); }
-.project-image{ position:relative; overflow:hidden; height:200px; }
-.project-image img{ width:100%; height:100%; object-fit:cover; transition:transform .5s ease; }
-.project-card:hover .project-image img{ transform:scale(1.05); }
-.project-links{ position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.7); display:flex; align-items:center; justify-content:center; gap:20px; opacity:0; transition:opacity .3s ease; }
-:global([data-theme="light"]) .project-links{ background:rgba(0,0,0,.3); }
-.project-card:hover .project-links{ opacity:1; }
-.project-link{
-  color:#fff;
-  background:color-mix(in srgb, var(--accent) 80%, transparent);
-  padding:8px 15px;
-  border-radius:4px;
-  text-decoration:none;
-  font-size:.9rem;
-  transition:background .3s ease;
-}
-.project-link:hover{ background:var(--accent); }
-.project-info{ padding:20px; }
-.project-info h3{ color:var(--text-1); margin-bottom:10px; }
-.project-info p{ color:var(--text-2); font-size:.9rem; line-height:1.6; margin-bottom:15px; }
-.project-tech{ display:flex; flex-wrap:wrap; gap:10px; }
-.project-tech span{
-  background:color-mix(in srgb, var(--accent) 9%, transparent);
-  color:var(--accent);
-  padding:3px 10px;
-  border-radius:20px;
-  font-size:.7rem;
-}
-
 /* icono modo oscuro/blanco */
 
 .icon-btn{ color:var(--text-1); width:40px; height:40px; min-width:0; border-radius:50%; background:transparent; transition:background-color .3s ease, transform .35s ease; }
