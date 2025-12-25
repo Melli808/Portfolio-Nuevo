@@ -96,7 +96,6 @@ defineProps({
 </template>
 
 <style scoped>
-/* Title (misma regla que venís repitiendo) */
 .section-content{
   width:100%;
   max-width:1200px;
@@ -121,8 +120,6 @@ defineProps({
   height:3px;
   background:var(--accent);
 }
-
-/* === Projects (copiado de tu App.vue) === */
 .projects-section{ background:linear-gradient(to top,var(--black) 100%); }
 
 .projects-grid{

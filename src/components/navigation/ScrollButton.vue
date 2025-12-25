@@ -94,8 +94,6 @@ const { scrollToSection } = useScroll()
   stroke:var(--text-1);
   opacity:1;
 }
-
-/* Accesibilidad */
 .sr-only{
   position:absolute;
   width:1px;

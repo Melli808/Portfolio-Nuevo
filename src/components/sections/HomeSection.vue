@@ -8,7 +8,6 @@ defineProps({
 </script>
 
 <template>
-  <!-- CASA -->
   <main id="home" class="start-screen" role="main">
     <div class="intro">
       <p class="intro-sub">{{ t('intro.sub') }}</p>
@@ -33,7 +32,6 @@ defineProps({
 </template>
 
 <style scoped>
-/* Home */
 .start-screen{
   width:100vw;
   height:100vh;

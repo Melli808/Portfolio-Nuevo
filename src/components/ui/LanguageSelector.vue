@@ -30,8 +30,7 @@ const props = defineProps({
   t: { type: Function, required: true },
   locale: { type: String, required: true },
   locales: { type: Array, required: true },
-
-  // 👇 esto es lo que controla el v-model:langMenu desde App.vue
+  
   langMenu: { type: Boolean, required: true },
 })
 

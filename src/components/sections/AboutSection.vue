@@ -12,7 +12,6 @@ defineProps({
       <h2 class="section-title">{{ t('about.title') }}</h2>
 
       <div class="about-grid">
-        <!-- Texto -->
         <div class="about-text">
           <p>{{ t('about.p1') }}</p>
           <p>{{ t('about.p2') }}</p>
@@ -28,8 +27,6 @@ defineProps({
             <li>Figma / Adobe XD</li>
           </ul>
         </div>
-
-        <!-- Imagen -->
         <div class="about-image">
           <div class="image-container">
             <div class="image-border"></div>
@@ -52,7 +49,6 @@ defineProps({
 </template>
 
 <style scoped>
-/* === About === */
 .about-section{
   position:relative;
   z-index:2;
@@ -64,7 +60,6 @@ defineProps({
   margin:0 auto;
 }
 
-/* Title (con línea) */
 .section-title{
   font-size:clamp(1.6rem, 2vw + 1rem, 2.5rem);
   font-weight:700;
@@ -84,7 +79,6 @@ defineProps({
   background:var(--accent);
 }
 
-/* Grid */
 .about-grid{
   display:grid;
   grid-template-columns:1.2fr .8fr;
@@ -92,7 +86,6 @@ defineProps({
   align-items:center;
 }
 
-/* Texto */
 .about-text{
   color:var(--text-2);
   font-size:1rem;
@@ -102,7 +95,6 @@ defineProps({
   margin-bottom:20px;
 }
 
-/* Tecnologías */
 .tech-title{
   margin-top:30px;
   margin-bottom:16px;
@@ -130,13 +122,11 @@ defineProps({
   color:var(--accent);
 }
 
-/* Imagen */
 .about-image{
   display:flex;
   justify-content:flex-end;
 }
 
-/* Card */
 .image-container{
   position:relative;
   width:420px;
@@ -144,7 +134,6 @@ defineProps({
   border-radius:16px;
 }
 
-/* Marco (offset) */
 .image-border{
   position:absolute;
   inset:0;
@@ -154,8 +143,6 @@ defineProps({
   pointer-events:none;
   opacity:.9;
 }
-
-/* Foto real (sin recorte raro) */
 .image-container{
   position:relative;
   width:420px;
@@ -187,17 +174,14 @@ defineProps({
 }
 
 .image-container:hover .image-border{
-  transform:translate(8px, 8px); /* se “acerca” un toque */
+  transform:translate(8px, 8px); 
   opacity:1;
 }
 
 .image-container:hover .profile-image{
-  transform:translate(-2px, -2px); /* micro movimiento opuesto (queda pro) */
+  transform:translate(-2px, -2px); 
 }
 
-
-
-/* Responsive */
 @media (max-width:992px){
   .about-grid{
     grid-template-columns:1fr;

@@ -8,7 +8,6 @@ defineProps({
 </script>
 
 <template>
-  <!-- Skills Section (LOGOS) -->
   <section id="skills" class="section skills-section">
     <div class="section-content">
       <h2 class="section-title">{{ t('skills.title') }}</h2>
@@ -39,7 +38,6 @@ defineProps({
 </template>
 
 <style scoped>
-/* === Skills === */
 .skills-section{
   background:linear-gradient(to bottom, transparent 1%, var(--black) 100%);
   position:relative;
@@ -137,9 +135,6 @@ defineProps({
   height:3px;
   background:var(--accent);
 }
-
-
-/* Responsive (solo Skills) */
 @media (max-width:1200px){
   .skills-grid.logos{ grid-template-columns:repeat(2,1fr); }
 }

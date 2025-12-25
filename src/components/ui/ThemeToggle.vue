@@ -20,5 +20,4 @@ const emit = defineEmits(['toggle'])
 </script>
 
 <style scoped>
-/* no hace falta CSS acá si ya te gusta como está */
 </style>
