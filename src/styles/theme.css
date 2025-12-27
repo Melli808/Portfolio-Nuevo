@@ -1,47 +1,35 @@
-/* =========================
-   THEME VARIABLES (GLOBAL)
-   ========================= */
-
-/* Default = DARK */
+/* DARK THEME*/
 :root{
   --accent:#FFB301;
   --expo-out:cubic-bezier(0.16,1,0.3,1);
 
-  /* Text */
   --text-1:#ffffff;
   --text-2:#cccccc;
   --text-3:#999ca7;
   --muted:#919191;
 
-  /* Base colors */
   --bg:#111111;
   --black:#000000;
   --c1:#111111;
   --c2:#141414;
   --c3:#121212;
 
-  /* Surfaces */
   --surface-1:rgba(30,30,30,.8);
   --surface-2:rgba(40,40,40,.6);
   --surface-3:rgba(40,40,40,.45);
 
-  /* Borders */
   --border:rgba(255,255,255,.1);
   --border-soft:rgba(255,255,255,.08);
 
-  /* Shadows */
   --shadow-1:rgba(0,0,0,.5);
   --shadow-2:rgba(0,0,0,.35);
 
-  /* Inputs */
   --input-bg:rgba(255,255,255,.05);
   --input-focus-bg:rgba(63,176,255,.05);
   --input-border:rgba(255,255,255,.1);
 }
 
-/* =========================
-   LIGHT THEME
-   ========================= */
+/* LIGHT THEME*/
 [data-theme="light"]{
   --accent:#0233d6;
 

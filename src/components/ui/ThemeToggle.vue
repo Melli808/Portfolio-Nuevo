@@ -28,4 +28,18 @@ const emit = defineEmits(['toggle'])
     border-radius: 50%;
     transition: background-color 0.3s ease, transform 0.35s ease;
   }
+  .icon-btn{ 
+    color:var(--text-1); 
+    width:40px; 
+    height:40px; 
+    min-width:0; 
+    border-radius:50%; 
+    background:transparent; 
+    transition:background-color .3s ease, 
+    transform .35s ease; 
+  }
+  .icon-btn:hover{ 
+    background-color:var(--surface-3); 
+    transform:translateY(-1px) scale(1.03); 
+  }
 </style>

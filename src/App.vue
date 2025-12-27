@@ -8,13 +8,13 @@
         <div class="loading-percent">{{ loading }}%</div>
       </div>
     </div>
-    <!-- CASA -->
+    <!-- home -->
     <HomeSection :t="t" :nameImage="nameImage" />
-    <!-- Skills Section (LOGOS) -->
+    <!-- Skills -->
     <SkillsSection :t="t" :skillGroups="skillGroups" />
-    <!-- About Section -->
+    <!-- About/Sobre mi -->
     <AboutSection :t="t" />
-    <!-- Projects Section -->
+    <!-- Projects -->
     <ProjectsSection :t="t" />
     <!-- Floating Navigation -->
      <FloatingNav :show="showFloatingNav" :t="t" />
@@ -62,6 +62,8 @@ import ESLogo from './assets/logos/es.svg'
 import ENLogo from './assets/logos/en.svg'
 // css // 
 import './styles/theme.css'
+import './styles/app.css'
+
 const { loading, slideOut, loaded, start, stop } = useLoading()
 const showFloatingNav = ref(false)
 const isDark = ref(true)
@@ -263,10 +265,6 @@ function submitForm() {}
 
 <style scoped>
 :global(.v-application){ background:transparent!important; }
-
-/* ===== THEME VARIABLES ===== */
-
-
 /* View Transitions (global) */
 :global(::view-transition-group(root)){ animation-duration:.7s; animation-timing-function:var(--expo-out); }
 :global(::view-transition-new(root)){ animation-name:reveal-light; }
@@ -313,12 +311,7 @@ function submitForm() {}
 .loading-percent{ font-size:clamp(2.4rem,2vw + 1.6rem,4rem); font-weight:bold; color:var(--text-1); transition:all .3s ease; }
 
 
-/* About Section */
-.about-section{ background:linear-gradient(to top,var(--black) 100%); }
-/* icono modo oscuro/blanco */
 
-.icon-btn{ color:var(--text-1); width:40px; height:40px; min-width:0; border-radius:50%; background:transparent; transition:background-color .3s ease, transform .35s ease; }
-.icon-btn:hover{ background-color:var(--surface-3); transform:translateY(-1px) scale(1.03); }
 
 
 /* Botón global (siempre visible, sin bloquear interacción debajo) */
@@ -332,37 +325,5 @@ function submitForm() {}
 .theme-toggle-global :deep(*) {
   pointer-events:auto;
 }
- .theme-toggle-btn{ pointer-events:auto; }
-
-/* Secciones genéricas */
-.section{ 
-  padding:100px 20px; 
-  position:relative; 
-  min-height:100vh; 
-  display:flex; 
-  align-items:center;
-  justify-content: center;
-  z-index:2; 
-  scroll-margin-top:80px; }
-
-.section-content{ max-width:1200px; margin:0 auto; width:100%; }
-.section-title{ font-size:clamp(1.6rem, 2vw + 1rem, 2.5rem); color:var(--text-1); margin-bottom:60px; position:relative; display:inline-block; }
-.section-title::after{ content:''; position:absolute; bottom:-10px; left:0; width:60px; height:3px; background:var(--accent); }
-.more-projects{ margin-top:50px; text-align:center; }
-.more-button{
-  display:inline-block;
-  padding:12px 30px;
-  background:transparent;
-  color:var(--accent);
-  border:1px solid var(--accent);
-  border-radius:30px;
-  text-decoration:none;
-  font-weight:500;
-  transition:all .3s ease;
-}
-.more-button:hover{
-  background:color-mix(in srgb, var(--accent) 10%, transparent);
-}
-
-
+ 
 </style>

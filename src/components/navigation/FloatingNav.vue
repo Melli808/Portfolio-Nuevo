@@ -22,6 +22,10 @@ const { scrollToSection } = useScroll()
       <v-icon>mdi-account</v-icon>
     </v-btn>
 
+    <v-btn icon class="icon-btn" @click="scrollToSection('#projects')" :aria-label="t('aria.navProjects')">
+      <v-icon>mdi-folder</v-icon>
+    </v-btn>
+
     <div class="divider"></div>
 
     <v-btn
@@ -50,13 +54,13 @@ const { scrollToSection } = useScroll()
 
 <style scoped>
 .footer-icons{
-  position:fixed; bottom:25px; left:50%; transform:translate(-50%,12px);
-  background-color:var(--surface-2); padding:8px 10px; border-radius:999px; display:flex; align-items:center; gap:10px;
+  position:fixed; bottom:12px; left:50%; transform:translate(-50%,12px);
+  background-color:var(--surface-2); padding:2px 5px; border-radius:50px; display:flex; align-items:center; gap:1px;
   box-shadow:0 4px 20px var(--shadow-1); opacity:0; transition:opacity .6s ease, transform .6s ease, background-color .35s ease, color .35s ease, border-color .35s ease; z-index:999;
 }
 .footer-icons.float-in{ opacity:1; transform:translate(-50%,0); }
 .icon-btn{ color:var(--text-1); width:50px; height:50px; min-width:0; border-radius:50%; background:transparent; transition:background-color .3s ease, transform .35s ease; }
 .icon-btn:hover{ background-color:var(--surface-3); transform:translateY(-1px) scale(1.03); }
-.divider{ width:1px; height:40px; background-color:var(--border); margin:0 4px; }
+.divider{ width:2px; height:30px; background-color:var(--border); margin:0 4px; }
 
 </style>

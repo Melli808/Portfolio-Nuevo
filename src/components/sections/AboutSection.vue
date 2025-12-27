@@ -50,6 +50,7 @@ defineProps({
 
 <style scoped>
 .about-section{
+  background:linear-gradient(to top,var(--black) 100%); 
   position:relative;
   z-index:2;
 }
