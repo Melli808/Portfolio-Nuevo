@@ -1,5 +1,5 @@
 <template>
-  <div class="background"></div>
+  <background-pattern class="background" />
   <v-app>
     <!-- CARGA -->
     <div :class="['loading-screen', { 'slide-up': slideOut }]">
@@ -40,15 +40,19 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
+// componentes//
+import BackgroundPattern from './components/layout/BackgroundPattern.vue'
 import HomeSection from './components/sections/HomeSection.vue'
 import SkillsSection from './components/sections/SkillsSection.vue' 
 import AboutSection from './components/sections/AboutSection.vue'   
 import ProjectsSection from './components/sections/ProjectsSection.vue'
-import { useLoading } from './composables/useLoading'
 import FloatingNav from './components/navigation/FloatingNav.vue'
+// composables //
+import { useLoading } from './composables/useLoading'
 import LanguageSelector from './components/ui/LanguageSelector.vue'
 import ThemeToggle from './components/ui/ThemeToggle.vue'
 import { useI18nLite } from './composables/useI18nLite'
+// assets //
 import NameDark from './assets/Santiago_Melgarejo.png'
 import NameLight from './assets/Santiago_Melgarejo_Black.png'
 import VueLogo from './assets/logos/vue.svg'
@@ -264,7 +268,7 @@ function submitForm() {}
 </script>
 
 <style scoped>
-:global(.v-application){ background:transparent!important; }
+
 /* View Transitions (global) */
 :global(::view-transition-group(root)){ animation-duration:.7s; animation-timing-function:var(--expo-out); }
 :global(::view-transition-new(root)){ animation-name:reveal-light; }
@@ -283,20 +287,6 @@ function submitForm() {}
 /* Smooth scroll */
 :global(html:focus-within){ scroll-behavior:smooth; }
 
-/* Background */
-.background{ position:fixed; inset:0; z-index:0; width:100%; height:100%; --s:80px;
-  --_g:var(--c3) 0 120deg,#0000 0;
-  background:
-    conic-gradient(from -60deg at 50% calc(100%/3),var(--_g)),
-    conic-gradient(from 120deg at 50% calc(200%/3),var(--_g)),
-    conic-gradient(from 60deg at calc(200%/3),var(--c3) 60deg,var(--c2) 0 120deg,#0000 0),
-    conic-gradient(from 180deg at calc(100%/3),var(--c1) 60deg,var(--_g)),
-    linear-gradient(90deg,var(--c1) calc(100%/6),var(--c2) 0 50%,var(--c1) 0 calc(500%/6),var(--c2) 0);
-  background-size:calc(1.732 * var(--s)) var(--s);
-  pointer-events:none; animation:moveBackground 20s linear infinite;
-}
-@keyframes moveBackground{ 0%{background-position:0 0;} 100%{background-position:calc(1.732 * var(--s)) var(--s);} }
-
 /* Loading */
 .loading-screen{
   width:100vw; height:100vh; background:var(--bg); position:fixed; top:0; left:0; z-index:999;
@@ -309,10 +299,6 @@ function submitForm() {}
 .loading-content{ z-index:2; display:flex; flex-direction:column; align-items:center; }
 .loading-text{ color:var(--muted); font-size:.9rem; margin-bottom:10px; letter-spacing:2px; }
 .loading-percent{ font-size:clamp(2.4rem,2vw + 1.6rem,4rem); font-weight:bold; color:var(--text-1); transition:all .3s ease; }
-
-
-
-
 
 /* Botón global (siempre visible, sin bloquear interacción debajo) */
 .theme-toggle-global  {
