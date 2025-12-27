@@ -60,6 +60,8 @@ import GitLogo from './assets/logos/git.svg'
 import BlenderLogo from './assets/logos/Blender.svg'
 import ESLogo from './assets/logos/es.svg'
 import ENLogo from './assets/logos/en.svg'
+// css // 
+import './styles/theme.css'
 const { loading, slideOut, loaded, start, stop } = useLoading()
 const showFloatingNav = ref(false)
 const isDark = ref(true)
@@ -263,37 +265,7 @@ function submitForm() {}
 :global(.v-application){ background:transparent!important; }
 
 /* ===== THEME VARIABLES ===== */
-:global(:root){
-  --accent:#FFB301;
-  --expo-out:cubic-bezier(0.16,1,0.3,1);
 
-  --text-1:#fff; --text-2:#ccc; --text-3:#999ca7; --muted:#919191;
-  --bg:#111; --black:#000; --c1:#111111; --c2:#141414; --c3:#121212;
-
-  --surface-1:rgba(30,30,30,.8);
-  --surface-2:rgba(40,40,40,.6);
-  --surface-3:rgba(40,40,40,.45);
-
-  --border:rgba(255,255,255,.1);
-  --border-soft:rgba(255,255,255,.08);
-
-  --shadow-1:rgba(0,0,0,.5);
-  --shadow-2:rgba(0,0,0,.35);
-  --input-bg:rgba(255,255,255,.05);
-  --input-focus-bg:rgba(63,176,255,.05);
-  --input-border:rgba(255,255,255,.1);
-}
-:global([data-theme="light"]){
-  --accent:#0233d6;
-  --text-1:#111; --text-2:#444; --text-3:#5b6b83; --muted:#666;
-  --bg:#f6f7f9; --black:#fff; --c1:#eef1f6; --c2:#fff; --c3:#e9eef5;
-  --surface-1:rgba(255,255,255,.9);
-  --surface-2:rgba(255,255,255,.85);
-  --surface-3:rgba(255,255,255,.8);
-  --border:rgba(0,0,0,.12); --border-soft:rgba(0,0,0,.08);
-  --shadow-1:rgba(0,0,0,.12); --shadow-2:rgba(0,0,0,.08);
-  --input-bg:rgba(0,0,0,.03); --input-focus-bg:rgba(0,0,0,.04); --input-border:rgba(0,0,0,.12);
-}
 
 /* View Transitions (global) */
 :global(::view-transition-group(root)){ animation-duration:.7s; animation-timing-function:var(--expo-out); }
@@ -392,60 +364,5 @@ function submitForm() {}
   background:color-mix(in srgb, var(--accent) 10%, transparent);
 }
 
-/* Responsive */
-@media (max-width:1200px){
-  .about-grid{ gap:30px; }
-}
-@media (max-width:992px){
-  .intro-name{ font-size:3.5rem; }
-  .intro-role{ font-size:2rem; }
-  .section-title{ font-size:2rem; }
-  .about-grid{ grid-template-columns:1fr; }
-  .about-image{ order:-1; margin-bottom:40px; }
-  .image-container{ max-width:350px; }
-}
-@media (max-width:768px){
-  .intro{ padding-top:80px; }
-  .intro-sub{ transform:none; }
-  .name-image{ transform:none; max-height:200px; }
-  .intro-role,.intro-desc,.intro-available{ transform:none; }
-  .projects-grid{ grid-template-columns:1fr; }
-  .section{ padding:80px 20px; }
-  .footer-icons{ bottom:10px; padding:6px 8px; }
-  .icon-btn{ width:36px; height:36px; }
-}
-@media (max-width:576px){
-  .intro-name{ font-size:2.5rem; }
-  .name-image{ max-height:150px; }
-  .intro-role{ font-size:1.5rem; }
-  .intro-desc{ font-size:.9rem; }
-  .section-title{ font-size:1.8rem; margin-bottom:40px; }
-  .project-links{ flex-direction:column; gap:10px; }
-  .footer-icons{ flex-wrap:wrap; justify-content:center; width:90%; max-width:350px; padding:8px; }
-  .divider{ display:none; }
-}
-@media (max-width:400px){
-  .intro-name{ font-size:2rem; }
-  .name-image{ max-height:120px; }
-  .intro-role{ font-size:1.3rem; }
-  .section-title{ font-size:1.5rem; }
-}
-
-/* A11y */
-
-
-/* ========================= */
-/*  APPEND: Language selector overrides (sin romper tu orden) */
-/* ========================= */
-
-.theme-toggle-global{
-  display:flex;
-  align-items:center;
-  gap:8px; /* separa el lang del theme */
-}
-
-.theme-toggle-global {
-  pointer-events:auto;
-}
 
 </style>

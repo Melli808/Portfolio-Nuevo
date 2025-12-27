@@ -20,4 +20,12 @@ const emit = defineEmits(['toggle'])
 </script>
 
 <style scoped>
+  .theme-toggle-btn {
+    color: var(--text-1);
+    width: 50px;
+    height: 50px;
+    min-width: 0;
+    border-radius: 50%;
+    transition: background-color 0.3s ease, transform 0.35s ease;
+  }
 </style>
