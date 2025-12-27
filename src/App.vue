@@ -2,12 +2,7 @@
   <background-pattern class="background" />
   <v-app>
     <!-- CARGA -->
-    <div :class="['loading-screen', { 'slide-up': slideOut }]">
-      <div class="loading-content">
-        <div class="loading-text">{{ t('loading.text') }}</div>
-        <div class="loading-percent">{{ loading }}%</div>
-      </div>
-    </div>
+    <LoadingOverlay :loading="loading" :slide-out="slideOut" :text="t('loading.text')" />
     <!-- home -->
     <HomeSection :t="t" :nameImage="nameImage" />
     <!-- Skills -->
@@ -41,6 +36,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 // componentes//
+import LoadingOverlay from './components/loading/LoadingOverlay.vue'
 import BackgroundPattern from './components/layout/BackgroundPattern.vue'
 import HomeSection from './components/sections/HomeSection.vue'
 import SkillsSection from './components/sections/SkillsSection.vue' 
@@ -284,21 +280,6 @@ function submitForm() {}
   to  { clip-path:polygon(171% 50%, 50% 171%, -50% 71%, 50% -71%); }
 }
 
-/* Smooth scroll */
-:global(html:focus-within){ scroll-behavior:smooth; }
-
-/* Loading */
-.loading-screen{
-  width:100vw; height:100vh; background:var(--bg); position:fixed; top:0; left:0; z-index:999;
-  display:flex; flex-direction:column; justify-content:center; align-items:center; pointer-events:none; overflow:hidden;
-  transform:translateY(0);
-  transition:transform 1s ease-in-out, clip-path 1s ease-in-out, background-color .35s ease, color .35s ease, border-color .35s ease;
-  clip-path:inset(0 0 0 0 round 0px);
-}
-.slide-up{ transform:translateY(-100%); box-shadow:0 40px 60px var(--shadow-1); }
-.loading-content{ z-index:2; display:flex; flex-direction:column; align-items:center; }
-.loading-text{ color:var(--muted); font-size:.9rem; margin-bottom:10px; letter-spacing:2px; }
-.loading-percent{ font-size:clamp(2.4rem,2vw + 1.6rem,4rem); font-weight:bold; color:var(--text-1); transition:all .3s ease; }
 
 /* Botón global (siempre visible, sin bloquear interacción debajo) */
 .theme-toggle-global  {
